@@ -1,0 +1,608 @@
+{\rtf1\ansi\ansicpg936\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fnil\fcharset134 STHeitiSC-Light;\f1\fnil\fcharset0 LucidaGrande;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red35\green35\blue35;\red189\green54\blue19;\red252\green244\blue220;
+\red33\green118\blue199;\red83\green104\blue112;\red165\green119\blue5;\red115\green138\blue4;\red37\green146\blue134;
+\red180\green0\blue98;\red68\green137\blue147;\red29\green133\blue25;\red77\green0\blue158;\red38\green71\blue75;
+\red48\green111\blue121;\red32\green60\blue63;\red186\green0\blue17;\red110\green32\blue13;\red0\green11\blue255;
+\red46\green13\blue110;\red92\green38\blue153;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25320\viewh14280\viewkind0
+\deftab720
+\pard\pardeftab720\sl920
+
+\f0\b\fs52 \cf2 \expnd0\expndtw0\kerning0
+\'b7\'e2\'d7\'b0
+\f1 xmppManager
+\f0 \'c0\'e0
+\f1 \
+\pard\pardeftab720\sl400
+
+\f2\b0\fs24 \cf3 \cb4 \expnd0\expndtw0\kerning0
+#import \cf5 \expnd0\expndtw0\kerning0
+<Foundation/Foundation.h>\
+\cf3 \expnd0\expndtw0\kerning0
+#import \cf5 \expnd0\expndtw0\kerning0
+"XMPPFramework.h"\cf3 \expnd0\expndtw0\kerning0
+  \
+// 
+\f0 \expnd0\expndtw0\kerning0
+\'b8\'c3\'c0\'e0\'d6\'f7\'d2\'aa\'b7\'e2\'d7\'b0\'c1\'cb
+\f2 \expnd0\expndtw0\kerning0
+xmpp
+\f0 \expnd0\expndtw0\kerning0
+\'b5\'c4\'b3\'a3\'d3\'c3\'b7\'bd\'b7\'a8\
+
+\f2 \expnd0\expndtw0\kerning0
+@interface XMPPManager : NSObject\cf5 \expnd0\expndtw0\kerning0
+<XMPPStreamDelegate>\
+\cf3 \expnd0\expndtw0\kerning0
+//
+\f0 \expnd0\expndtw0\kerning0
+\'cd\'a8\'d0\'c5\'b9\'dc\'b5\'c0\'a3\'ac\'ca\'e4\'c8\'eb\'ca\'e4\'b3\'f6\'c1\'f7
+\f2 \expnd0\expndtw0\kerning0
+@property(nonatomic,strong)XMPPStream xmppStream;\
+//
+\f0 \expnd0\expndtw0\kerning0
+\'b5\'a5\'c0\'fd\'b7\'bd\'b7\'a8
+\f2 \expnd0\expndtw0\kerning0
++(XMPPManager )defaultManager;\
+//
+\f0 \expnd0\expndtw0\kerning0
+\'b5\'c7\'c2\'bc\'b5\'c4\'b7\'bd\'b7\'a8\
+
+\f2 \expnd0\expndtw0\kerning0
+-(void)loginwithName:(NSString )userName andPassword:(NSString )password;\
+//
+\f0 \expnd0\expndtw0\kerning0
+\'d7\'a2\'b2\'e1
+\f2 \expnd0\expndtw0\kerning0
+-(void)registerWithName:(NSString )userName andPassword:(NSString )password;\
+-(void)logout;\
+@end\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf3 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl400
+\cf6 \expnd0\expndtw0\kerning0
+#pragma mark 
+\f0 \'b5\'a5\'c0\'fd\'b7\'bd\'b7\'a8\'b5\'c4\'ca\'b5\'cf\'d6\
+
+\f2 +(\cf7 \expnd0\expndtw0\kerning0
+XMPPManager\cf6 \expnd0\expndtw0\kerning0
+ )defaultManager\{    \
+\pard\pardeftab720\sl400
+\cf8 \expnd0\expndtw0\kerning0
+static\cf6 \expnd0\expndtw0\kerning0
+ \cf7 \expnd0\expndtw0\kerning0
+XMPPManager\cf6 \expnd0\expndtw0\kerning0
+ manager = nil;    \
+\cf8 \expnd0\expndtw0\kerning0
+static\cf6 \expnd0\expndtw0\kerning0
+ dispatch_once_t onceToken;    \
+dispatch_once(&onceToken, ^\{        \
+manager = [[\cf7 \expnd0\expndtw0\kerning0
+XMPPManager\cf6 \expnd0\expndtw0\kerning0
+ alloc]\cf8 \expnd0\expndtw0\kerning0
+init\cf6 \expnd0\expndtw0\kerning0
+];    \
+\});    \
+\cf8 \expnd0\expndtw0\kerning0
+return\cf6 \expnd0\expndtw0\kerning0
+ manager;\
+\}\
+\
+-(instancetype)init\{   \
+ \cf8 \expnd0\expndtw0\kerning0
+if\cf6 \expnd0\expndtw0\kerning0
+ ([\cf8 \expnd0\expndtw0\kerning0
+super\cf6 \expnd0\expndtw0\kerning0
+ init])\{   \
+\pard\pardeftab720\sl400
+\cf9 \expnd0\expndtw0\kerning0
+//1\cf6 \expnd0\expndtw0\kerning0
+.
+\f0 \'b3\'f5\'ca\'bc\'bb\'af
+\f2 xmppStream
+\f0 \'a3\'ac\'b5\'c7\'c2\'bc\'ba\'cd\'d7\'a2\'b2\'e1\'b5\'c4\'ca\'b1\'ba\'f2\'b6\'bc\'bb\'e1\'d3\'c3\'b5\'bd\'cb\'fc
+\f2     \
+\pard\pardeftab720\sl400
+\cf8 \expnd0\expndtw0\kerning0
+self\cf6 \expnd0\expndtw0\kerning0
+.xmppStream = [[\cf7 \expnd0\expndtw0\kerning0
+XMPPStream\cf6 \expnd0\expndtw0\kerning0
+ alloc]init];     \
+\pard\pardeftab720\sl400
+\cf9 \expnd0\expndtw0\kerning0
+//
+\f0 \cf6 \expnd0\expndtw0\kerning0
+\'c9\'e8\'d6\'c3\'b7\'fe\'ce\'f1\'c6\'f7\'b5\'d8\'d6\'b7
+\f2 ,
+\f0 \'d5\'e2\'c0\'ef\'d3\'c3\'b5\'c4\'ca\'c7\'b1\'be\'b5\'d8\'b5\'d8\'d6\'b7\'a3\'a8\'bf\'c9\'bb\'bb\'b3\'c9\'b9\'ab\'cb\'be\'be\'df\'cc\'e5\'b5\'d8\'d6\'b7\'a3\'a9
+\f2    \
+ \cf8 \expnd0\expndtw0\kerning0
+self\cf6 \expnd0\expndtw0\kerning0
+.xmppStream.hostName = @\cf9 \expnd0\expndtw0\kerning0
+"127.0.0.1"\cf6 \expnd0\expndtw0\kerning0
+;\
+\cf9 \expnd0\expndtw0\kerning0
+//\cf6 \expnd0\expndtw0\kerning0
+    
+\f0 \'c9\'e8\'d6\'c3\'b6\'cb\'bf\'da\'ba\'c5
+\f2     \
+\pard\pardeftab720\sl400
+\cf8 \expnd0\expndtw0\kerning0
+self\cf6 \expnd0\expndtw0\kerning0
+.xmppStream.hostPort = \cf9 \expnd0\expndtw0\kerning0
+5222\cf6 \expnd0\expndtw0\kerning0
+;\
+\pard\pardeftab720\sl400
+\cf9 \expnd0\expndtw0\kerning0
+//\cf6 \expnd0\expndtw0\kerning0
+    
+\f0 \'c9\'e8\'d6\'c3\'b4\'fa\'c0\'ed
+\f2     \
+[\cf8 \expnd0\expndtw0\kerning0
+self\cf6 \expnd0\expndtw0\kerning0
+.xmppStream \cf3 \expnd0\expndtw0\kerning0
+addDelegate:\cf8 \expnd0\expndtw0\kerning0
+self\cf6 \expnd0\expndtw0\kerning0
+ \cf3 \expnd0\expndtw0\kerning0
+delegateQueue:\cf6 \expnd0\expndtw0\kerning0
+dispatch_get_main_queue()];   \
+ \}   \
+ \cf8 \expnd0\expndtw0\kerning0
+return\cf6 \expnd0\expndtw0\kerning0
+ \cf8 \expnd0\expndtw0\kerning0
+self\cf6 \expnd0\expndtw0\kerning0
+;\
+\}\
+\
+-(void)logout\{\
+\cf9 \expnd0\expndtw0\kerning0
+//
+\f0 \cf6 \expnd0\expndtw0\kerning0
+\'b1\'ed\'ca\'be\'c0\'eb\'cf\'df\'b2\'bb\'bf\'c9\'d3\'c3
+\f2    \
+ \cf7 \expnd0\expndtw0\kerning0
+XMPPPresence\cf6 \expnd0\expndtw0\kerning0
+ *presence = [\cf7 \expnd0\expndtw0\kerning0
+XMPPPresence\cf6 \expnd0\expndtw0\kerning0
+ \cf3 \expnd0\expndtw0\kerning0
+presenceWithType:\cf6 \expnd0\expndtw0\kerning0
+@\cf9 \expnd0\expndtw0\kerning0
+"unavailable"\cf6 \expnd0\expndtw0\kerning0
+];\
+\cf9 \expnd0\expndtw0\kerning0
+//
+\f0 \cf6 \expnd0\expndtw0\kerning0
+\'cf\'f2\'b7\'fe\'ce\'f1\'c6\'f7\'b7\'a2\'cb\'cd\'c0\'eb\'cf\'df\'cf\'fb\'cf\'a2
+\f2     \
+[\cf8 \expnd0\expndtw0\kerning0
+self\cf6 \expnd0\expndtw0\kerning0
+.xmppStream \cf3 \expnd0\expndtw0\kerning0
+sendElement:\cf6 \expnd0\expndtw0\kerning0
+presence]; \
+\cf9 \expnd0\expndtw0\kerning0
+//
+\f0 \cf6 \expnd0\expndtw0\kerning0
+\'b6\'cf\'bf\'aa\'c1\'b4\'bd\'d3
+\f2     \
+[\cf8 \expnd0\expndtw0\kerning0
+self\cf6 \expnd0\expndtw0\kerning0
+.xmppStream disconnect];\
+\}\
+\
+/*\
+\pard\pardeftab720\sl400
+
+\fs26 \cf6 \expnd0\expndtw0\kerning0
+ 1.
+\f0 \'b3\'f5\'ca\'bc\'bb\'af\'d2\'bb\'b8\'f6
+\f2 xmppStream\cb1 \expnd0\expndtw0\kerning0
+\
+\cb4 \expnd0\expndtw0\kerning0
+ 2.
+\f0 \'c1\'ac\'bd\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'a3\'a8\'b3\'c9\'b9\'a6\'bb\'f2\'d5\'df\'ca\'a7\'b0\'dc\'a3\'a9
+\f2 \cb1 \expnd0\expndtw0\kerning0
+\
+\cb4 \expnd0\expndtw0\kerning0
+ 3.
+\f0 \'b3\'c9\'b9\'a6\'b5\'c4\'bb\'f9\'b4\'a1\'c9\'cf\'a3\'ac\'b7\'fe\'ce\'f1\'c6\'f7\'d1\'e9\'d6\'a4\'a3\'a8\'b3\'c9\'b9\'a6\'bb\'f2\'d5\'df\'ca\'a7\'b0\'dc\'a3\'a9
+\f2 \cb1 \expnd0\expndtw0\kerning0
+\
+\cb4 \expnd0\expndtw0\kerning0
+ 4.
+\f0 \'b3\'c9\'b9\'a6\'b5\'c4\'bb\'f9\'b4\'a1\'c9\'cf\'a3\'ac\'b7\'a2\'cb\'cd\'c9\'cf\'cf\'df\'cf\'fb\'cf\'a2
+\f2 \
+*/\
+//
+\fs60 \cf10 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 @property\cf0 (\cf10 nonatomic\cf0 )\cf11 ConnectServerPurpose\cf0  connectServerPurposeType;\cf12 //
+\f0 \'d3\'c3\'c0\'b4\'b1\'ea\'bc\'c7\'c1\'ac\'bd\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'c4\'bf\'b5\'c4\'b5\'c4\'ca\'f4\'d0\'d4
+\f2\fs26 \cf6 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\tx1444\pardeftab1444\pardirnatural
+
+\fs60 \cf0 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 -(\cf10 void\cf0 )loginwithName:(\cf13 NSString\cf0  *)userName andPassword:(\cf13 NSString\cf0  *)password\
+\{\
+    \cf12 //
+\f0 \'b1\'ea\'bc\'c7\'c1\'ac\'bd\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'b5\'c4\'c4\'bf\'b5\'c4
+\f2 \cf0 \
+    \cf10 self\cf0 .\cf11 connectServerPurposeType\cf0  = \cf14 ConnectServerPurposeLogin\cf0 ;\
+    \cf12 //
+\f0 \'d5\'e2\'c0\'ef\'bc\'c7\'c2\'bc\'d3\'c3\'bb\'a7\'ca\'e4\'c8\'eb\'b5\'c4\'c3\'dc\'c2\'eb\'a3\'ac\'d4\'da\'b5\'c7\'c2\'bc\'a3\'a8\'d7\'a2\'b2\'e1\'a3\'a9\'b5\'c4\'b7\'bd\'b7\'a8\'c0\'ef\'c3\'e6\'ca\'b9\'d3\'c3
+\f2 \cf0 \
+    \cf10 self\cf0 .\cf11 password\cf0  = password;\
+    \cf12 /**\
+     *  1.
+\f0 \'b3\'f5\'ca\'bc\'bb\'af\'d2\'bb\'b8\'f6
+\f2 xmppStream\
+        2.
+\f0 \'c1\'ac\'bd\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'a3\'a8\'b3\'c9\'b9\'a6\'bb\'f2\'d5\'df\'ca\'a7\'b0\'dc\'a3\'a9
+\f2 \
+        3.
+\f0 \'b3\'c9\'b9\'a6\'b5\'c4\'bb\'f9\'b4\'a1\'c9\'cf\'a3\'ac\'b7\'fe\'ce\'f1\'c6\'f7\'d1\'e9\'d6\'a4\'a3\'a8\'b3\'c9\'b9\'a6\'bb\'f2\'d5\'df\'ca\'a7\'b0\'dc\'a3\'a9
+\f2 \
+        4.
+\f0 \'b3\'c9\'b9\'a6\'b5\'c4\'bb\'f9\'b4\'a1\'c9\'cf\'a3\'ac\'b7\'a2\'cb\'cd\'c9\'cf\'cf\'df\'cf\'fb\'cf\'a2
+\f2 \
+     */\cf0 \
+    \
+    \
+    \cf12 // *  
+\f0 \'b4\'b4\'bd\'a8
+\f2 xmppjid
+\f0 \'a3\'a8\'d3\'c3\'bb\'a7\'a3\'a9
+\f2 \cf0 \
+    \cf12 // *  @param NSString 
+\f0 \'d3\'c3\'bb\'a7\'c3\'fb\'a3\'ac\'d3\'f2\'c3\'fb\'a3\'ac\'b5\'c7\'c2\'bc\'b7\'fe\'ce\'f1\'c6\'f7\'b5\'c4\'b7\'bd\'ca\'bd\'a3\'a8\'c6\'bb\'b9\'fb\'a3\'ac\'b0\'b2\'d7\'bf\'b5\'c8\'a3\'a9
+\f2 \cf0 \
+   \
+    \cf15 XMPPJID\cf0  *jid = [\cf15 XMPPJID\cf0  \cf16 jidWithUser\cf0 :userName \cf16 domain\cf0 :\cf17 @"jackwong.local"\cf0  \cf16 resource\cf0 :\cf17 @"iPhone8"\cf0 ];\
+    \cf10 self\cf0 .\cf11 xmppStream\cf0 .\cf11 myJID\cf0  = jid;\
+    \cf12 //
+\f0 \'c1\'ac\'bd\'d3\'b5\'bd\'b7\'fe\'ce\'f1\'c6\'f7
+\f2 \cf0 \
+    [\cf10 self\cf0  \cf16 connectToServer\cf0 ];\
+\
+    \cf12 //
+\f0 \'d3\'d0\'bf\'c9\'c4\'dc\'b3\'c9\'b9\'a6\'bb\'f2\'d5\'df\'ca\'a7\'b0\'dc\'a3\'ac\'cb\'f9\'d2\'d4\'d3\'d0\'cf\'e0\'b6\'d4\'d3\'a6\'b5\'c4\'b4\'fa\'c0\'ed\'b7\'bd\'b7\'a8
+\f2 \cf0 \
+    \
+\}\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf18 #pragma mark 
+\f0 \'c1\'ac\'bd\'d3\'b5\'bd\'b7\'fe\'ce\'f1\'c6\'f7\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf0 -(\cf10 void\cf0 )connectToServer\{\
+    \cf12 //
+\f0 \'c8\'e7\'b9\'fb\'d2\'d1\'be\'ad\'b4\'e6\'d4\'da\'d2\'bb\'b8\'f6\'c1\'ac\'bd\'d3\'a3\'ac\'d0\'e8\'d2\'aa\'bd\'ab\'b5\'b1\'c7\'b0\'b5\'c4\'c1\'ac\'bd\'d3\'b6\'cf\'bf\'aa\'a3\'ac\'c8\'bb\'ba\'f3\'d4\'d9\'bf\'aa\'ca\'bc\'d0\'c2\'b5\'c4\'c1\'ac\'bd\'d3
+\f2 \cf0 \
+    \cf10 if\cf0  ([\cf10 self\cf0 .\cf11 xmppStream\cf0  \cf16 isConnected\cf0 ]) \{\
+        [\cf10 self\cf0  \cf16 logout\cf0 ];\
+    \}\
+    \cf13 NSError\cf0  *error = \cf10 nil\cf0 ;\
+    [\cf10 self\cf0 .\cf11 xmppStream\cf0  \cf16 connectWithTimeout\cf0 :\cf19 30.0f\cf0  \cf16 error\cf0 :&error];\
+    \cf10 if\cf0  (error) \{\
+        \cf20 NSLog\cf0 (\cf17 @"error = %@"\cf0 ,error);\
+    \}\
+\}\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf18 #pragma mark 
+\f0 \'d7\'a2\'cf\'fa\'b7\'bd\'b7\'a8\'b5\'c4\'ca\'b5\'cf\'d6
+\f2 \
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf0 -(\cf10 void\cf0 )logout\{\
+    \cf12 //
+\f0 \'b1\'ed\'ca\'be\'c0\'eb\'cf\'df\'b2\'bb\'bf\'c9\'d3\'c3
+\f2 \cf0 \
+    \cf15 XMPPPresence\cf0  *presence = [\cf15 XMPPPresence\cf0  \cf16 presenceWithType\cf0 :\cf17 @"unavailable"\cf0 ];\
+\cf12 //    
+\f0 \'cf\'f2\'b7\'fe\'ce\'f1\'c6\'f7\'b7\'a2\'cb\'cd\'c0\'eb\'cf\'df\'cf\'fb\'cf\'a2
+\f2 \cf0 \
+    [\cf10 self\cf0 .\cf11 xmppStream\cf0  \cf16 sendElement\cf0 :presence];\
+    \cf12 //
+\f0 \'b6\'cf\'bf\'aa\'c1\'b4\'bd\'d3
+\f2 \cf0 \
+    [\cf10 self\cf0 .\cf11 xmppStream\cf0  \cf16 disconnect\cf0 ];\
+\}\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf18 #pragma mark xmppStream
+\f0 \'b5\'c4\'b4\'fa\'c0\'ed\'b7\'bd\'b7\'a8
+\f2 \
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf12 //
+\f0 \'c1\'ac\'bd\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'ca\'a7\'b0\'dc\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \cf0 \
+-(\cf10 void\cf0 )xmppStreamConnectDidTimeout:(\cf15 XMPPStream\cf0  *)sender\{\
+    \cf20 NSLog\cf0 (\cf17 @"
+\f0 \'c1\'ac\'bd\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'ca\'a7\'b0\'dc\'b5\'c4\'b7\'bd\'b7\'a8\'a3\'ac\'c7\'eb\'bc\'ec\'b2\'e9\'cd\'f8\'c2\'e7\'ca\'c7\'b7\'f1\'d5\'fd\'b3\'a3
+\f2 "\cf0 );\
+\}\
+\cf12 //
+\f0 \'c1\'ac\'bd\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'b3\'c9\'b9\'a6\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \cf0 \
+-(\cf10 void\cf0 )xmppStreamDidConnect:(\cf15 XMPPStream\cf0  *)sender\
+\{\
+    \cf20 NSLog\cf0 (\cf17 @"
+\f0 \'c1\'ac\'bd\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'b3\'c9\'b9\'a6\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 "\cf0 );\
+\cf12 //
+\f0 \'b5\'c7\'c2\'bc
+\f2 \cf0 \
+    \cf10 if\cf0  (\cf10 self\cf0 .\cf11 connectServerPurposeType\cf0  == \cf14 ConnectServerPurposeLogin\cf0 ) \{\
+        \cf13 NSError\cf0  *error = \cf10 nil\cf0 ;\
+\cf12 //        
+\f0 \'cf\'f2\'b7\'fe\'ce\'f1\'c6\'f7\'b7\'a2\'cb\'cd\'c3\'dc\'c2\'eb\'d1\'e9\'d6\'a4
+\f2  //
+\f0 \'d1\'e9\'d6\'a4\'bf\'c9\'c4\'dc\'ca\'a7\'b0\'dc\'bb\'f2\'d5\'df\'b3\'c9\'b9\'a6
+\f2 \cf0 \
+\cf12 //        if ([sender supportsDeprecatedPlainAuthentication]) \{\cf0 \
+            [sender \cf16 authenticateWithPassword\cf0 :\cf10 self\cf0 .\cf11 password\cf0  \cf16 error\cf0 :&error];\
+\cf12 //        \}\cf0 \
+\cf12 //        NSLog(@"-----%@",self.password);\cf0 \
+    \}\
+\cf12 //
+\f0 \'d7\'a2\'b2\'e1
+\f2 \cf0 \
+    \cf10 else\cf0 \{\
+        \cf12 //
+\f0 \'cf\'f2\'b7\'fe\'ce\'f1\'c6\'f7\'b7\'a2\'cb\'cd\'d2\'bb\'b8\'f6\'c3\'dc\'c2\'eb\'d7\'a2\'b2\'e1\'a3\'a8\'b3\'c9\'b9\'a6\'bb\'f2\'d5\'df\'ca\'a7\'b0\'dc\'a3\'a9
+\f2 \cf0 \
+        [sender \cf16 registerWithPassword\cf0 :\cf10 self\cf0 .\cf11 password\cf0  \cf16 error\cf0 :\cf10 nil\cf0 ];\
+    \}\
+\}\
+\
+\
+\cf12 //
+\f0 \'d1\'e9\'d6\'a4\'b3\'c9\'b9\'a6\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \cf0 \
+-(\cf10 void\cf0 )xmppStreamDidAuthenticate:(\cf15 XMPPStream\cf0  *)sender\
+\{\
+    \cf20 NSLog\cf0 (\cf17 @"
+\f0 \'d1\'e9\'d6\'a4\'b3\'c9\'b9\'a6\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 "\cf0 );\
+    \cf12 /**\
+     *  unavailable 
+\f0 \'c0\'eb\'cf\'df
+\f2 \
+       available  
+\f0 \'c9\'cf\'cf\'df
+\f2 \
+       away  
+\f0 \'c0\'eb\'bf\'aa
+\f2 \
+       do not disturb 
+\f0 \'c3\'a6\'c2\'b5
+\f2 \
+     */\cf0 \
+    \cf15 XMPPPresence\cf0  *presence = [\cf15 XMPPPresence\cf0  \cf16 presenceWithType\cf0 :\cf17 @"available"\cf0 ];\
+    [\cf10 self\cf0 .\cf11 xmppStream\cf0  \cf16 sendElement\cf0 :presence];\
+\}\
+\cf12 //
+\f0 \'d1\'e9\'d6\'a4\'ca\'a7\'b0\'dc\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \cf0 \
+-(\cf10 void\cf0 )xmppStream:(\cf15 XMPPStream\cf0  *)sender didNotAuthenticate:(\cf15 DDXMLElement\cf0  *)error\
+\{\
+    \cf20 NSLog\cf0 (\cf17 @"
+\f0 \'d1\'e9\'d6\'a4\'ca\'a7\'b0\'dc\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 ,
+\f0 \'c7\'eb\'bc\'ec\'b2\'e9\'c4\'e3\'b5\'c4\'d3\'c3\'bb\'a7\'c3\'fb\'bb\'f2\'c3\'dc\'c2\'eb\'ca\'c7\'b7\'f1\'d5\'fd\'c8\'b7
+\f2 ,%@"\cf0 ,error);\
+\}\
+\
+\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf18 #pragma mark 
+\f0 \'d7\'a2\'b2\'e1
+\f2 \
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf0 -(\cf10 void\cf0 )registerWithName:(\cf13 NSString\cf0  *)userName andPassword:(\cf13 NSString\cf0  *)password\{\
+    \cf10 self\cf0 .\cf11 password\cf0  = password;\
+    \cf12 //0.
+\f0 \'b1\'ea\'bc\'c7\'c1\'ac\'bd\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'b5\'c4\'c4\'bf\'b5\'c4
+\f2 \cf0 \
+    \cf10 self\cf0 .\cf11 connectServerPurposeType\cf0  = \cf14 ConnectServerPurposeRegister\cf0 ;\
+    \cf12 //1. 
+\f0 \'b4\'b4\'bd\'a8\'d2\'bb\'b8\'f6
+\f2 jid\cf0 \
+    \cf15 XMPPJID\cf0  *jid = [\cf15 XMPPJID\cf0  \cf16 jidWithUser\cf0 :userName \cf16 domain\cf0 :\cf17 @"jackwong.local"\cf0  \cf16 resource\cf0 :\cf17 @"iPhone8"\cf0 ];\
+    \cf12 //2.
+\f0 \'bd\'ab
+\f2 jid
+\f0 \'b0\'f3\'b6\'a8\'b5\'bd
+\f2 xmppStream\cf0 \
+    \cf10 self\cf0 .\cf11 xmppStream\cf0 .\cf11 myJID\cf0  = jid;\
+    \cf12 //3.
+\f0 \'c1\'ac\'bd\'d3\'b5\'bd\'b7\'fe\'ce\'f1\'c6\'f7
+\f2 \cf0 \
+    [\cf10 self\cf0  \cf16 connectToServer\cf0 ];\
+    \
+\}\
+\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf18 #pragma mark 
+\f0 \'d7\'a2\'b2\'e1\'b3\'c9\'b9\'a6\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf0 -(\cf10 void\cf0 )xmppStreamDidRegister:(\cf15 XMPPStream\cf0  *)sender\{\
+    \cf20 NSLog\cf0 (\cf17 @"
+\f0 \'d7\'a2\'b2\'e1\'b3\'c9\'b9\'a6\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 "\cf0 );\
+    \
+\}\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf18 #pragma mark 
+\f0 \'d7\'a2\'b2\'e1\'ca\'a7\'b0\'dc\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf0 -(\cf10 void\cf0 )xmppStream:(\cf15 XMPPStream\cf0  *)sender didNotRegister:(\cf15 DDXMLElement\cf0  *)error\
+\{\
+    \cf20 NSLog\cf0 (\cf17 @"
+\f0 \'d7\'a2\'b2\'e1\'ca\'a7\'b0\'dc\'d6\'b4\'d0\'d0\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 "\cf0 );\
+\}\
+\pard\tx1444\pardeftab1444\pardirnatural
+
+\fs26 \cf6 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\
+\
+\pard\tx1444\pardeftab1444\pardirnatural
+
+\fs60 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 //
+\f0 \'ba\'c3\'d3\'d1\'b9\'dc\'c0\'ed
+\f2 \cf0 \
+\cf10 @property\cf0 (\cf10 nonatomic\cf0 ,\cf10 strong\cf0 )\cf15 XMPPRoster\cf0  *xmppRoster;\
+\cf12 //
+\f0 \'d0\'c5\'cf\'a2\'b9\'e9\'b5\'b5\'b5\'c4\'c9\'cf\'cf\'c2\'ce\'c4
+\f2 \cf0 \
+\cf10 @property\cf0 (\cf10 nonatomic\cf0 ,\cf10 strong\cf0 )\cf13 NSManagedObjectContext\cf0  *messageArchivingContext;\
+\
+\cf12 //2.
+\f0 \'ba\'c3\'d3\'d1\'b9\'dc\'c0\'ed
+\f2 \cf0 \
+    \cf12 //
+\f0 \'bb\'f1\'b5\'c3\'d2\'bb\'b8\'f6\'b4\'e6\'b4\'a2\'ba\'c3\'d3\'d1\'b5\'c4
+\f2 CoreData
+\f0 \'b2\'d6\'bf\'e2\'a3\'ac\'d3\'c3\'c0\'b4\'ca\'fd\'be\'dd\'b3\'d6\'be\'c3\'bb\'af
+\f2 \cf0 \
+    \cf15 XMPPRosterCoreDataStorage\cf0  *rosterCoreDataStorage = [\cf15 XMPPRosterCoreDataStorage\cf0  \cf16 sharedInstance\cf0 ];\
+    \cf12 //
+\f0 \'b3\'f5\'ca\'bc\'bb\'af
+\f2 xmppRoster\cf0 \
+    \cf10 self\cf0 .\cf11 xmppRoster\cf0  = [[\cf15 XMPPRoster\cf0  \cf20 alloc\cf0 ]\cf16 initWithRosterStorage\cf0 :rosterCoreDataStorage \cf16 dispatchQueue\cf0 :\cf20 dispatch_get_main_queue\cf0 ()];\
+    \cf12 //
+\f0 \'bc\'a4\'bb\'ee
+\f2 \cf0 \
+    [\cf10 self\cf0 .\cf11 xmppRoster\cf0  \cf16 activate\cf0 :\cf10 self\cf0 .\cf11 xmppStream\cf0 ];\
+    \cf12 //
+\f0 \'c9\'e8\'d6\'c3\'b4\'fa\'c0\'ed
+\f2 \cf0 \
+    [\cf10 self\cf0 .\cf11 xmppRoster\cf0  \cf16 addDelegate\cf0 :\cf10 self\cf0  \cf16 delegateQueue\cf0 :\cf20 dispatch_get_main_queue\cf0 ()];\
+    \
+    \cf12 //3.
+\f0 \'b1\'a3\'b4\'e6\'c1\'c4\'cc\'ec\'bc\'c7\'c2\'bc
+\f2 \cf0 \
+    \cf12 //
+\f0 \'b3\'f5\'ca\'bc\'bb\'af\'d2\'bb\'b8\'f6\'b2\'d6\'bf\'e2
+\f2 \cf0 \
+    \cf15 XMPPMessageArchivingCoreDataStorage\cf0  *messageStorage = [\cf15 XMPPMessageArchivingCoreDataStorage\cf0  \cf16 sharedInstance\cf0 ];\
+    \cf12 //
+\f0 \'b4\'b4\'bd\'a8\'d2\'bb\'b8\'f6\'cf\'fb\'cf\'a2\'b9\'e9\'b5\'b5\'b6\'d4\'cf\'f3
+\f2 \cf0 \
+    \cf10 self\cf0 .\cf11 xmppMessageArchiving\cf0  = [[\cf15 XMPPMessageArchiving\cf0  \cf20 alloc\cf0 ]\cf16 initWithMessageArchivingStorage\cf0 :messageStorage \cf16 dispatchQueue\cf0 :\cf20 dispatch_get_main_queue\cf0 ()];\
+    \cf12 //
+\f0 \'bc\'a4\'bb\'ee
+\f2 \cf0 \
+    [\cf10 self\cf0 .\cf11 xmppMessageArchiving\cf0  \cf16 activate\cf0 :\cf10 self\cf0 .\cf11 xmppStream\cf0 ];\
+    \cf12 //
+\f0 \'c9\'cf\'cf\'c2\'ce\'c4
+\f2 \cf0 \
+    \cf10 self\cf0 .\cf11 messageArchivingContext\cf0  = messageStorage.\cf11 mainThreadManagedObjectContext\cf0 ;
+\fs26 \cf6 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720\sl400
+\cf6 \expnd0\expndtw0\kerning0
+\
+\
+\
+\pard\tx1444\pardeftab1444\pardirnatural
+
+\fs60 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 // 
+\f0 \'ca\'d5\'b5\'bd\'ba\'c3\'d3\'d1\'c7\'eb\'c7\'f3\'d6\'b4\'d0\'d0\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \cf0 \
+-(\cf10 void\cf0 )xmppRoster:(\cf15 XMPPRoster\cf0  *)sender didReceivePresenceSubscriptionRequest:(\cf15 XMPPPresence\cf0  *)presence\{\
+\cf12 //    self.fromJid = presence.from;\cf0 \
+    \cf13 UIAlertView\cf0  *alert = [[\cf13 UIAlertView\cf0  \cf20 alloc\cf0 ]\cf20 initWithTitle\cf0 :\cf17 @"
+\f0 \'cc\'e1\'ca\'be
+\f2 :
+\f0 \'d3\'d0\'c8\'cb\'cc\'ed\'bc\'d3\'c4\'e3
+\f2 "\cf0  \cf20 message\cf0 :presence.\cf16 from\cf0 .\cf11 user\cf0   \cf20 delegate\cf0 :\cf10 self\cf0  \cf20 cancelButtonTitle\cf0 :\cf17 @"
+\f0 \'be\'dc\'be\'f8
+\f2 "\cf0  \cf20 otherButtonTitles\cf0 :\cf17 @"OK"\cf0 , \cf10 nil\cf0 ];\
+    [alert \cf20 show\cf0 ];\
+\}\
+\
+\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf18 #pragma mark 
+\f0 \'bf\'aa\'ca\'bc\'bc\'ec\'cb\'f7\'ba\'c3\'d3\'d1\'c1\'d0\'b1\'ed\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf0 -(\cf10 void\cf0 )xmppRosterDidBeginPopulating:(\cf15 XMPPRoster\cf0  *)sender \{\
+    \cf20 NSLog\cf0 (\cf17 @"
+\f0 \'bf\'aa\'ca\'bc\'bc\'ec\'cb\'f7\'ba\'c3\'d3\'d1\'c1\'d0\'b1\'ed
+\f2 "\cf0 );\
+\}\
+\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf18 #pragma mark 
+\f0 \'d5\'fd\'d4\'da\'bc\'ec\'cb\'f7\'ba\'c3\'d3\'d1\'c1\'d0\'b1\'ed\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf0 -(\cf10 void\cf0 )xmppRoster:(\cf15 XMPPRoster\cf0  *)sender didRecieveRosterItem:(\cf15 DDXMLElement\cf0  *)item\{    \cf20 NSLog\cf0 (\cf17 @"
+\f0 \'c3\'bf\'d2\'bb\'b8\'f6\'ba\'c3\'d3\'d1\'b6\'bc\'bb\'e1\'d7\'df\'d2\'bb\'b4\'ce\'d5\'e2\'b8\'f6\'b7\'bd\'b7\'a8
+\f2 "\cf0 );\
+    \cf12 //
+\f0 \'bb\'f1\'b5\'c3
+\f2 item
+\f0 \'b5\'c4\'ca\'f4\'d0\'d4\'c0\'ef\'b5\'c4
+\f2 jid
+\f0 \'d7\'d6\'b7\'fb\'b4\'ae\'a3\'ac\'d4\'d9\'cd\'a8\'b9\'fd\'cb\'fc\'bb\'f1\'b5\'c3
+\f2 jid
+\f0 \'b6\'d4\'cf\'f3
+\f2 \cf0 \
+    \cf13 NSString\cf0  *jidStr = [[item \cf16 attributeForName\cf0 :\cf17 @"jid"\cf0 ] \cf16 stringValue\cf0 ];    \cf15 XMPPJID\cf0  *jid = [\cf15 XMPPJID\cf0  \cf16 jidWithString\cf0 :jidStr];\
+    \cf12 //
+\f0 \'ca\'c7\'b7\'f1\'d2\'d1\'be\'ad\'cc\'ed\'bc\'d3
+\f2 \cf0 \
+    \cf10 if\cf0  ([\cf10 self\cf0 .\cf11 rosterJids\cf0  \cf20 containsObject\cf0 :jid]) \{        \cf10 return\cf0 ;\
+    \}\
+    \cf12 //
+\f0 \'bd\'ab\'ba\'c3\'d3\'d1\'cc\'ed\'bc\'d3\'b5\'bd\'ca\'fd\'d7\'e9\'d6\'d0\'c8\'a5
+\f2 \cf0 \
+    [\cf10 self\cf0 .\cf11 rosterJids\cf0  \cf20 addObject\cf0 :jid];\
+    \cf12 //
+\f0 \'cc\'ed\'bc\'d3\'cd\'ea\'ca\'fd\'be\'dd\'d2\'aa\'b8\'fc\'d0\'c2
+\f2 UI
+\f0 \'a3\'a8\'b1\'ed\'ca\'d3\'cd\'bc\'b8\'fc\'d0\'c2\'a3\'a9
+\f2 \cf0 \
+    \cf13 NSIndexPath\cf0  *indexPath = [\cf13 NSIndexPath\cf0  \cf20 indexPathForRow\cf0 :\cf10 self\cf0 .\cf11 rosterJids\cf0 .\cf21 count\cf0 -\cf19 1\cf0  \cf20 inSection\cf0 :\cf19 0\cf0 ];\
+    [\cf10 self\cf0 .\cf21 tableView\cf0  \cf20 insertRowsAtIndexPaths\cf0 :\cf19 @[\cf0 indexPath\cf19 ]\cf0  \cf20 withRowAnimation\cf0 :\cf20 UITableViewRowAnimationAutomatic\cf0 ];\
+\}\
+\
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf18 #pragma mark 
+\f0 \'c9\'be\'b3\'fd\'ba\'c3\'d3\'d1\'d6\'b4\'d0\'d0\'b5\'c4\'b7\'bd\'b7\'a8
+\f2 \
+\pard\tx1444\pardeftab1444\pardirnatural
+\cf0 -(\cf10 void\cf0 )tableView:(\cf13 UITableView\cf0  *)tableView commitEditingStyle:(\cf21 UITableViewCellEditingStyle\cf0 )editingStyle forRowAtIndexPath:(\cf13 NSIndexPath\cf0  *)indexPath\{\
+    \cf10 if\cf0  (editingStyle==\cf20 UITableViewCellEditingStyleDelete\cf0 ) \{\
+        \cf12 //
+\f0 \'d5\'d2\'b5\'bd\'d2\'aa\'c9\'be\'b3\'fd\'b5\'c4\'c8\'cb
+\f2 \cf0 \
+        \cf15 XMPPJID\cf0  *jid = \cf10 self\cf0 .\cf11 rosterJids\cf0 [indexPath.\cf21 row\cf0 ];\
+        \cf12 //
+\f0 \'b4\'d3\'ca\'fd\'d7\'e9\'d6\'d0\'c9\'be\'b3\'fd
+\f2 \cf0 \
+        [\cf10 self\cf0 .\cf11 rosterJids\cf0  \cf20 removeObjectAtIndex\cf0 :indexPath.\cf21 row\cf0 ];\
+        \cf12 //
+\f0 \'b4\'d3
+\f2 Ui
+\f0 \'b5\'a5\'d4\'aa\'b8\'f1\'c9\'be\'b3\'fd
+\f2 \cf0 \
+        [tableView \cf20 deleteRowsAtIndexPaths\cf0 :\cf19 @[\cf0 indexPath\cf19 ]\cf0  \cf20 withRowAnimation\cf0 :\cf20 UITableViewRowAnimationAutomatic\cf0          ];\
+        \cf12 //
+\f0 \'b4\'d3\'b7\'fe\'ce\'f1\'c6\'f7\'c9\'be\'b3\'fd
+\f2 \cf0 \
+        [[\cf15 XMPPManager\cf0  \cf16 defaultManager\cf0 ].\cf11 xmppRoster\cf0  \cf16 removeUser\cf0 :jid];    \}\
+\}\
+\pard\tx1444\pardeftab1444\pardirnatural
+
+\fs26 \cf6 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720\sl400
+\cf6 \expnd0\expndtw0\kerning0
+\
+}

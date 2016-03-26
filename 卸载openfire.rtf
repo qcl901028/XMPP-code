@@ -1,0 +1,37 @@
+{\rtf1\ansi\ansicpg936\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fnil\fcharset134 STSongti-SC-Regular;\f1\fswiss\fcharset0 ArialMT;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs48 \cf2 \expnd0\expndtw0\kerning0
+\shad\shadx20\shady-20\shadr20\shado0 \shadc0 \'d0\'b6\'d4\'d8openfire\
+	
+\f1\fs28 \cf0 \expnd0\expndtw0\kerning0
+\shad0 sudo rm -rf /Library/PreferencePanes/Openfire.prefPane\
+	sudo rm -rf /usr/local/openfire\
+	sudo rm -rf /Library/LaunchDaemons/org.jivesoftware.openfire.plist
+\f0\fs48 \cf2 \expnd0\expndtw0\kerning0
+\shad\shadx20\shady-20\shadr20\shado0 \shadc0 \
+\
+3\'a3\'ac\'c6\'f4\'b6\'afopenfire\
+	mac10.10\'b2\'bb\'c4\'dc\'c6\'f4\'b6\'afopenfire\
+	
+\f2\fs22 \cf0 \kerning1\expnd0\expndtw0 \CocoaLigature0 \shad0 zhangguangyangdeMacBook-Pro:~ zhang_guang_yang$ sudo su\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural
+\cf0 sh-3.2# cd /usr/local/openfire/bin\
+sh-3.2# export JAVA_HOME='/usr/libexec/java_home'\
+sh-3.2# echo $JAVA_HOME /Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home \
+/usr/libexec/java_home /Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home\
+sh-3.2# ./openfire.sh\
+Error: JAVA_HOME is not defined correctly.\
+  We cannot execute /usr/libexec/java_home/bin/java\
+sh-3.2# export JAVA_HOME=`/usr/libexec/java_home`\
+sh-3.2# echo $JAVA_HOME /Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home \
+/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home /Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home\
+sh-3.2# ./openfire.sh\
+Openfire 3.10.2 [Oct 12, 2015 10:50:50 PM]\
+Admin console listening at http://zhangguangyangdemacbook-pro.local:9090\
+}
